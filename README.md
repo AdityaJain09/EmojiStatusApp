@@ -4,3 +4,6 @@ emoji status by authenticating using firebase authentication. This app also uses
 firebase cloud firestore, firebase function.
 
 ![This is app image](https://github.com/AdityaJain09/EmojiStatusApp/blob/master/app/src/main/res/assets/Screenshot_20220221-034608_EmojiStatusApp.jpg)
+
+
+Refer to this repo for firebase cloud firestore and functions using js.
