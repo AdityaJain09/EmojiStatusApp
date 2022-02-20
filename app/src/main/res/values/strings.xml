@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EmojiStatusApp</string>
+    <string name="emojistatus">Emoji Status</string>
+    <string name="client_id" translatable="false">1087392614186-9eq22nsoqcbu7dbpc97888km980q28kn.apps.googleusercontent.com</string>
+    <string name="no_user_signed_in">No Name</string>
+    <string name="logout">Logout</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="cancel">Cancel</string>
+    <string name="update_emoji">Update Emoji</string>
+    <string name="update">Update</string>
+    <string name="filter">filter</string>
+</resources>
