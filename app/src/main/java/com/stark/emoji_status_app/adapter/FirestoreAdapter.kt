@@ -10,7 +10,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.stark.emoji_status_app.databinding.ItemViewBinding
 import com.stark.emoji_status_app.model.User
-import com.stark.emoji_status_app.ui.RandomColorUtil
+import com.stark.emoji_status_app.RandomColorUtil
 
 class FirestoreAdapter(
     private val context: Context,

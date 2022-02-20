@@ -1,6 +1,4 @@
-package com.stark.emoji_status_app.ui
-
-import com.stark.emoji_status_app.R
+package com.stark.emoji_status_app
 
 object RandomColorUtil {
 

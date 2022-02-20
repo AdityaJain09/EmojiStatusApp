@@ -87,6 +87,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
+
+
     // Another Way to Handle Deprecated StartActivityForResult, No Use In this Project.
     private fun signIn() {
         val request = GetSignInIntentRequest.builder()
