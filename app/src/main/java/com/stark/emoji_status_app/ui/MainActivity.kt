@@ -79,9 +79,8 @@ class MainActivity : AppCompatActivity() {
 
                 // update user emoji if current user not null
                 if (currentUser != null && currentUser.displayName != null) {
-                    val user = User(currentUser.displayName!!, updatedEmoji)
                         db.collection("users").document(currentUser.uid)
-                            .set(user)
+                            .update("emojis", updatedEmoji)
                     Toast.makeText(this@MainActivity,
                     "Emoji Updated Successfully.",
                     Toast.LENGTH_SHORT)

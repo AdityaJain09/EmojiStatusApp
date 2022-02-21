@@ -10,7 +10,7 @@ class EmojiFilter(
     private val context: Context,
 ) : InputFilter {
 
-    private val regex = "([\\u20a0-\\u32ff\\ud83c\\udc00-\\ud83d\\udeff\\udbb9\\udce5-\\udbb9\\udcee])"
+    private val regex = "([\\u1f60\\u20a0-\\u32ff\\ud83c\\udc00-\\ud83d\\udeff\\udbb9\\udce5-\\udbb9\\udcee])"
 
     override fun filter(
         source: CharSequence?,
@@ -20,6 +20,7 @@ class EmojiFilter(
         p4: Int,
         p5: Int,
     ): CharSequence {
+        // Some emojis is excluded using this way, will fix it soon.
         if (source == null || source.isBlank()) return ""
         val pattern = Pattern.compile(regex).matcher(source)
         if (!pattern.find()) {
