@@ -2,13 +2,13 @@ package com.stark.emoji_status_app.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -24,10 +24,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.stark.emoji_status_app.R
+import com.stark.emoji_status_app.createToast
 
-
-class LoginActivity : AppCompatActivity() {
-
+class LoginActivity : BaseActivity() {
     private val TAG = this::class.java.simpleName
     private lateinit var loginBtn: SignInButton
     private lateinit var progress: ProgressBar
@@ -53,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                 // The ApiException status code indicates the detailed failure reason.
                 Log.d(TAG, "Sign In Failed", e)
             }
+
         }
     }
 
@@ -74,18 +74,31 @@ class LoginActivity : AppCompatActivity() {
         } else {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
+        // TODO: 2/26/2022 Add User Permission Functionality
+        // TODO: 2/26/2022 When User Signed For first time, they should notified on their email using cloud function
+        // TODO: 2/26/2022 Add Admin Functionality to use curd on users
+        // TODO: 2/26/2022 User Can delete their account
+        // TODO: 2/28/2022 Internet functionality available or not
+        // TODO: 3/3/2022 Notifty on notification when user singed first time 
+        // TODO: 3/3/2022 Send message as well.
     }
 
     private fun clickListener() {
-
         loginBtn.setOnClickListener {
-            googleSignInClient.signOut()
-            loginResultHandler.launch(googleSignInClient.signInIntent)
-            //    optional way to sign in using google
-            //    signIn()
+            if (!isConnected) {
+                createToast("Network Connection Failed", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                googleSignInClient.signOut()
+                loginResultHandler.launch(googleSignInClient.signInIntent)
+
+                //    optional way to sign in using google
+                //    signIn()
+            }
         }
     }
-
 
     public override fun onStart() {
         super.onStart()

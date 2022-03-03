@@ -4,17 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e0e0e0"
     tools:context=".ui.LoginActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/title_dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/emojistatus"
-        android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+    <soup.neumorphism.NeumorphCardView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        style="@style/ShapeAppearance.Neumorph.CardView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:neumorph_shadowElevation="4dp"
+        app:neumorph_shapeType="flat"
+        app:neumorph_shadowColorDark="#707070"
+        app:neumorph_shadowColorLight="#ececec">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/emojistatus"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+
+        </LinearLayout>
+        
+    </soup.neumorphism.NeumorphCardView>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnSignIn"

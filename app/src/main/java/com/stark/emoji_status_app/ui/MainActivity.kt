@@ -2,6 +2,7 @@ package com.stark.emoji_status_app.ui
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.Menu
@@ -9,7 +10,6 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -21,9 +21,10 @@ import com.google.firebase.ktx.Firebase
 import com.stark.emoji_status_app.EmojiFilter
 import com.stark.emoji_status_app.R
 import com.stark.emoji_status_app.adapter.FirestoreAdapter
+import com.stark.emoji_status_app.createToast
 import com.stark.emoji_status_app.model.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var recycleView: RecyclerView
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         recycleView.layoutManager = LinearLayoutManager(this)
     }
 
-    // Not Recommended to do this way. Better way to update emoji.
+    // Not Recommended to do this way. There are Better way to update emoji.
     private val editDialog =  {
         val editText = EditText(this)
         val maxLengthFilter = InputFilter.LengthFilter(9)
@@ -68,6 +69,10 @@ class MainActivity : AppCompatActivity() {
             .show()
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).apply {
             setOnClickListener {
+                if (!isConnected) {
+                    createToast("No Network Found", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val updatedEmoji = editText.text.toString()
                 val currentUser = auth.currentUser
                 if (updatedEmoji.isBlank()) {
@@ -119,6 +124,19 @@ class MainActivity : AppCompatActivity() {
             else -> {
                 super.onOptionsItemSelected(item)
             }
+        }
+    }
+
+    private fun sendEmail() {
+        // No use in this project just email intent launch functionality.
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.data = Uri.parse("mailto:")
+        intent.putExtra(Intent.EXTRA_EMAIL, "jaditya797@gmail.com")
+        intent.putExtra(Intent.EXTRA_TEXT, "Thanks For Registering ${auth.currentUser}, It means alot.")
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Regarding Emoji Registeration")
+        intent.type = "text/plain"
+        kotlin.runCatching {
+            startActivity(Intent.createChooser(intent, "Choose Email Client.."))
         }
     }
 }
