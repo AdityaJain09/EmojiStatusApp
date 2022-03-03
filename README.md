@@ -11,4 +11,4 @@ broadcast receiver.
 ![This is game screen image](https://github.com/AdityaJain09/EmojiStatusApp/blob/master/app/src/main/res/drawable/screenshot_emoji_status_app.png)
 
 
-Refer to this repo for firebase cloud firestore and functions using js.
+Refer to this repo for firebase cloud firestore and functions using js -> https://github.com/AdityaJain09/EmojiStatusCloud.
